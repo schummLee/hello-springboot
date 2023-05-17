@@ -1,0 +1,55 @@
+# 应用名称
+spring:
+  application:
+    name: HelloSpringBoot
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hello?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: admin
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    # 开启模板缓存（默认值： true ）,开发时一般设置为false
+    cache: false
+    # 开启 MVC Thymeleaf 视图解析（默认值： true ）
+    enabled: true
+    # 模板编码
+    encoding: UTF-8
+    # 要运⽤于模板之上的模板模式。另⻅ StandardTemplate-ModeHandlers( 默认值： HTML5)
+    mode: HTML5
+    # 在构建 URL 时添加到视图名称前的前缀（默认值： classpath:/templates/ ）
+    prefix: classpath:/templates/
+    # 在构建 URL 时添加到视图名称后的后缀（默认值： .html ）
+    suffix: .html
+
+
+mybatis:
+  #配置MyBatis的xml配置文件路径
+  mapper-locations: classpath:mappers/*.xml
+  #配置XML映射文件中指定的实体类别名路径
+  type-aliases-package: cn.edu.neusoft.hellospringboot.domain
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+#pagehelper分页设置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  support-methods-arguments: true
+  params: count=countSql
+
+# 应用服务 WEB 访问端口
+server:
+  port: 8088
+person:
+  id: 123
+  hobby:
+    - read
+    - aaa
+    - bbb
+
+

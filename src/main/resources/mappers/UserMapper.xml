@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.neusoft.hellospringboot.mapper.UserMapper">
+    
+    <resultMap id="userAndRoleList" type="User">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="age" column="age"></result>
+        <result property="sex" column="sex"></result>
+        <result property="address" column="address"></result>
+        <collection property="roleList" ofType="Role">
+            <id property="id" column="role_id"></id>
+            <result property="name" column="role_name"></result>
+            <result property="memo" column="role_memo"></result>
+        </collection>
+    </resultMap>
+
+    <select id="list" resultMap="userAndRoleList">
+        select u.*,r.* from t_user u
+                left join t_user_role_rel rel on u.id = rel.user_id
+                left join t_role r on r.role_id = rel.role_id
+            <where>
+                <if test="username != null and username != ''">
+                    and username like concat('%', #{username}, '%')
+                </if>
+                <if test="age != null">
+                    and age = #{age}
+                </if>
+                <if test="sex != null and sex != ''">
+                    and sex = #{sex}
+                </if>
+                <if test="address != null and address != ''">
+                    and address = #{address}
+                </if>
+            </where>
+
+    </select>
+
+    <select id="getUserById" resultMap="userAndRoleList">
+        select u.*,r.* from t_user u
+            left join t_user_role_rel rel on u.id = rel.user_id
+            left join t_role r on r.role_id = rel.role_id
+        where u.id = #{id}
+
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user (username, age, sex, address, password)
+        values (#{username}, #{age}, #{sex}, #{address}, #{password})
+    </insert>
+
+    <update id="update" parameterType="User">
+        update t_user
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

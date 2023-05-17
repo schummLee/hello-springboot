@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/signin.css}" rel="stylesheet">
+</head>
+<body class="text-center">
+    <form class="form-signin" action="/manager/doLogin" method="post">
+        <img class="mb-4" th:src="@{/img/login.jpg}" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">管理员登录</h1>
+        <input class="form-control" type="text" th:placeholder="账号" name="username"><br>
+        <input class="form-control" type="text" th:placeholder="密码" name="password"><br>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="登录">
+        <p>&copy;版权 <span th:text="${currentYear}">2019</span> </p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>用户信息</h1>
+<p>ID：<span th:text="${#session.getAttribute('userId')}">xxx</span></p>
+<p>ID：<span th:text="${session.userId}">xxx</span></p>
+<p>名称：<span th:text="${user.username}">xxx</span></p>
+<p>性别：<span th:text="${user.sex}">female</span></p>
+<p>年龄：<span th:text="${user.age}">18</span></p>
+<p th:if="${#strings.equals(user.username, 'xiaoli')}">管理员</p>
+</body>
+</html>
